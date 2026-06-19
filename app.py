@@ -23,6 +23,14 @@ if st.button("Analyze"):
 
     st.subheader("Stock Prices")
 
+    st.caption(f"Stock data source: {result['data_source']}")
+
+    if result.get("latest_date") and result.get("previous_date"):
+        st.caption(
+
+            f"Compared dates: {result['previous_date']} → {result['latest_date']}"
+        )
+
     price_col1, price_col2 = st.columns(2)
 
     with price_col1:

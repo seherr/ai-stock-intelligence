@@ -1,6 +1,6 @@
 from logger import logger
 
-from services.stock_service import get_mock_stock_data
+from services.stock_service import get_mock_stock_data,get_real_stock_data,get_stock_data
 from services.news_service import get_mock_news, calculate_news_sentiment
 
 from core.feature_engineering import calculate_percentage_change
@@ -26,7 +26,8 @@ def run_analysis(ticker):
 
     logger.info(f"Starting analysis for {ticker}")
 
-    stock_data = get_mock_stock_data(ticker)
+    stock_data = get_stock_data(ticker)
+
     logger.info(f"Stock data loaded for {stock_data['ticker']}")
 
     today_price = stock_data["today_price"]
@@ -89,5 +90,8 @@ def run_analysis(ticker):
         "confidence_score": confidence_score,
         "signal": signal,
         "explanation": explanation,
-        "report": report
+        "report": report,
+        "data_source":stock_data.get("data_source", "unknown"),
+        "latest_date": stock_data.get("latest_date"),
+        "previous_date": stock_data.get("previous_date")
     }
